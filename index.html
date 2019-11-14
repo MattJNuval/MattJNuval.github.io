@@ -2,8 +2,19 @@
 <html>
 <head>
 	<title>Hello World</title>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'></script>
+	<script type='text/javascript'>   
+		var socket = io('http://localhost:3000', {path: '/socket.io'}); // connect to server
+
+		socket.on('fromServer', function(data){ 
+			document.getElementById("test").innerHTML = 'Recieved ' + data.id + ' from Server';
+			socket.emit('fromClient', {id: 'bar'});
+		});
+	</script>
 </head>
 <body>
+	<p id="test"></p>
+
 
 </body>
 </html>
