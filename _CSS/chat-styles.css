@@ -38,6 +38,7 @@ form button {
 
 #messages li {
     padding: 5px 10px;
+    
 }
 
 #messages li:nth-child(odd) {
@@ -49,4 +50,9 @@ form button {
   bottom: 70px;
   right: 25px;
   font-size: 30px;
+}
+
+#messageViewPort
+{
+    padding-bottom: 5% ;
 }
