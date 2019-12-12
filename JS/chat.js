@@ -32,7 +32,7 @@ function messageAppend(words)
     console.log(words[0]);
     var list = document.createElement("li");
    // var child = message.appendChild(list);
-   var apples = $('#messages').append($('<li>').text(""));
+//    var apples = $('#messages').append($('<li>').text(""));
     var output= "";
     var i = 0;
     for (i = 0 ; i < words.length ; i++)
@@ -42,11 +42,11 @@ function messageAppend(words)
         // appendChildElement.innerHTML = words[i];
         // messageOutput.innerHTML = words[i];
 
-        apples.append($('<button>').text(words[i]+" "));
-        // output  ="<button> " + words[i] +"</button>";
+        // apples.append($('<button>').text(words[i]+" "));
+        output  =output+"<button> " + words[i] +"</button>";
         console.log(words[i]);
     }
-    // $('#messages').append($('<li>').text(output));
+    $('#messages').append($('<li>').html(output));
     buttonStarter()
 }
 
