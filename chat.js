@@ -1,5 +1,6 @@
 $(function () {
-    var socket = io('http://localhost:3000', { path: '/socket.io' }); // connect to server
+    var socket = io('http://13.52.224.61:7110', { path: '/socket.io' }); 
+    // connect to server
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', $('#m').val());
