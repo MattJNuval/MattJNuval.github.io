@@ -70,7 +70,7 @@ function output()
 
 function ButtonAssign()
 {
-    p= 0;
+    var p= 0;
     while(p<k)
     { 
     
