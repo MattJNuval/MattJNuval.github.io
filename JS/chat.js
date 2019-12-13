@@ -46,7 +46,7 @@ function messageAppend(words)
         // messageOutput.innerHTML = words[i];
 
         // apples.append($('<button>').text(words[i]+" "));
-        output  =output+"<button id=" +k + ">"+ words[i] +"</button>";
+        output  =output+"<button id=" +k + ">"+ words[i] +"</button>"+ " ";
         console.log(words[i]);
         // document.getElementById(""+k).addEventListener('click',input.setAttribute("value", document.getElementById(""+k).innerHTML));   
         k = k +1 ;
@@ -79,7 +79,7 @@ function ButtonAssign()
         {
             console.log(p);
             document.getElementById(""+p).addEventListener('click',function(){
-                document.getElementById("m").value =document.getElementById("m").value+" "+this.innerHTML}); 
+                document.getElementById("m").value =document.getElementById("m").value+this.innerHTML+ " "}); 
             p = p +1;
         }
         
