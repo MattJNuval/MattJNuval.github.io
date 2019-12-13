@@ -2,6 +2,7 @@
 
 var bns;
 var k = 0;
+var p= 0;
 var input = document.getElementById("m");
 $(function () {
     var socket = io('http://13.52.224.61:7110', { path: '/socket.io' }); 
@@ -70,7 +71,7 @@ function output()
 
 function ButtonAssign()
 {
-    var p= 0;
+    
     while(p<k)
     { 
     
@@ -78,7 +79,7 @@ function ButtonAssign()
         {
             console.log(p);
             document.getElementById(""+p).addEventListener('click',function(){
-                document.getElementById("m").value =this.innerHTML}); 
+                document.getElementById("m").value =document.getElementById("m").value+" "+this.innerHTML}); 
             p = p +1;
         }
         
