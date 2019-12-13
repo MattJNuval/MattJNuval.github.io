@@ -1,6 +1,8 @@
 // var messeage = document.querySelector("#message").innerHTML;
 
 var bns;
+var k = 0;
+var input = document.getElementById("m");
 $(function () {
     var socket = io('http://13.52.224.61:7110', { path: '/socket.io' }); 
     // connect to server
@@ -43,26 +45,45 @@ function messageAppend(words)
         // messageOutput.innerHTML = words[i];
 
         // apples.append($('<button>').text(words[i]+" "));
-        output  =output+"<button> " + words[i] +"</button>";
+        output  =output+"<button id=" +k + ">"+ words[i] +"</button>";
         console.log(words[i]);
+        // document.getElementById(""+k).addEventListener('click',input.setAttribute("value", document.getElementById(""+k).innerHTML));   
+        k = k +1 ;
     }
     $('#messages').append($('<li>').html(output));
-    buttonStarter()
-}
 
-function  buttonStarter()
+    // for (p = 0 ; p<= k; p++)
+    // {
+    //     document.getElementById(""+p).addEventListener('click',startText(document.getElementById(""+p).innerHTML));  
+    // }
+    // buttonStarter()
+    ButtonAssign();
+}
+function output()
 {
-    // buttonAssign = document.querySelector("button");
-    // buttonAssign.addEventListener('click', startText);
-    bns = $("button");
-    bns.on("click", startText);
+    console.log("TEST")
+}
 
+// function startText(){
+//     document.getElementById("m").value = document.getElementById(""+p).innerHTML;
+// }
+
+function ButtonAssign()
+{
+    p= 0;
+    while(p<k)
+    { 
+    
+        if(p<=k)
+        {
+            console.log(p);
+            document.getElementById(""+p).addEventListener('click',function(){
+                document.getElementById("m").value =this.innerHTML}); 
+            p = p +1;
+        }
+        
+    
+    }
 }
 
 
-
-
-function startText(){
-    var input = document.querySelector("#m");
-    input.setAttribute("value", bns.text()); 
-}
