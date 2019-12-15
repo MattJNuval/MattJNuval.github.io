@@ -8,8 +8,17 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
     console.log('a user connected');
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function (data) {
         console.log('user disconnected');
+        data = 'A user disconnected'
+        io.emit('disconnect', data);
+    });
+});
+
+io.on('connection', function (socket) {
+    socket.on('fromServer', function (data) {
+        data = 'A user connected';
+        io.emit('fromServer', data);
     });
 });
 
