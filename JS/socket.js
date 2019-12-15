@@ -31,3 +31,8 @@ io.on('connection', function (socket) {
 http.listen(7110, function () {
     console.log('listening on *:7110');
 });
+
+function assignment()
+{
+    
+}
