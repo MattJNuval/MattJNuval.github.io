@@ -2,3 +2,13 @@
   width: 100%;
   height: auto;
 }
+
+.nonSecureBanner { 
+    padding:10px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    background: blue;
+    color: yellow;
+    text-align: center;
+}

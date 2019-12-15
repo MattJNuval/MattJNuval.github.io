@@ -1,15 +1,31 @@
-function randomUserName(){
+//a code to show username on rightside.html
+// document.getElementById("whoComesIn").outerHTML = "<p>" + newComer + "</p>";
 
-  //var numUsed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  //var letterUsed = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+$(function () {
+    var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
 
-  var formerUsed = ['cool', 'good', 'plain', 'kind', 'badass']
-  var latterUsed = ['people', 'AI', 'alien', 'android', 'wanderer']
+    $('form').submit(function (e) {
+        e.preventDefault(); // prevents page reloading
+        // socket.emit('chat message', $('#m').val());
 
-  var realFormerUsed = formerUsed[Math.floor(Math.random() * 5)];//generate random number between 0 to 4
-  var realLatterUsed = latterUsed[Math.floor(Math.random() * 5)];
+        $('#m').val('');
+        return false;
+    });
 
-  document.write(realFormerUsed  + " " + realLatterUsed + " joined chatting.");
-}
+    console.log("A USER CONNECTED");
+    socket.emit('fromServer');
+    socket.emit('disconnect');
 
-//window.onload = randomUserName();
+    socket.on('fromServer', function (data) {
+      console.log("this is " + data);
+        // $('#messages').append($('<li>').text(data));
+    });
+
+    socket.on('disconnect', function (data) {
+        // $('#messages').append($('<li>').text(data));
+    });
+
+    socket.on('chat message', function (msg) {
+        // messageAppend(wordFilter(msg));
+    });
+});

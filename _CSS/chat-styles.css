@@ -45,12 +45,12 @@ form button {
     background: #eee;
 }
 
-#fixedResetButton{
+/* #fixedResetButton{
   position: fixed;
   bottom: 70px;
   right: 25px;
   font-size: 30px;
-}
+} no longer used */ 
 
 #messageViewPort
 {
