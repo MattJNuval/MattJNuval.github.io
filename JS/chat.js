@@ -5,16 +5,29 @@ var k = 0;
 var p= 0;
 var input = document.getElementById("m");
 $(function () {
-    var socket = io('http://13.52.224.61:7110', { path: '/socket.io' }); 
-    // connect to server
+    var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
+
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', $('#m').val());
+
         $('#m').val('');
         return false;
     });
+
+    console.log("A USER CONNECTED");
+    socket.emit('fromServer');
+    socket.emit('disconnect');
+
+    socket.on('fromServer', function (data) {
+        $('#messages').append($('<li>').text(data));
+    });
+
+    socket.on('disconnect', function (data) {
+        $('#messages').append($('<li>').text(data));
+    });
+
     socket.on('chat message', function (msg) {
-        // $('#messages').append($('<li>').text(msg));
         messageAppend(wordFilter(msg));
     });
 });
