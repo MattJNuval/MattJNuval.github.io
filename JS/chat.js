@@ -3,17 +3,12 @@
 var bns;
 var k = 0;
 var p= 0;
+var idName ;
 var input = document.getElementById("m");
 $(function () {
     var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
 
-    $('form').submit(function (e) {
-        e.preventDefault(); // prevents page reloading
-        socket.emit('chat message', $('#m').val());
-
-        $('#m').val('');
-        return false;
-    });
+   
  
     console.log("A USER CONNECTED");
     socket.emit('fromServer');
@@ -23,12 +18,23 @@ $(function () {
         $('#messages').append($('<li>').text(data));
     });
 
+    socket.on('fromServerAssign', function (data) {
+        // $('#messages').append($('<li>').text(data));
+        idName = data;
+    });
     socket.on('disconnect', function (data) {
         $('#messages').append($('<li>').text(data));
     });
 
     socket.on('chat message', function (msg) {
         messageAppend(wordFilter(msg));
+    });
+    $('form').submit(function (e) {
+        e.preventDefault(); // prevents page reloading
+        socket.emit('chat message', idName +": " +$('#m').val());
+
+        $('#m').val('');
+        return false;
     });
 });
 
@@ -50,8 +56,8 @@ function messageAppend(words)
    // var child = message.appendChild(list);
 //    var apples = $('#messages').append($('<li>').text(""));
     var output= "";
-    var i = 0;
-    for (i = 0 ; i < words.length ; i++)
+    var i = 3;
+    for (i = 3 ; i < words.length ; i++)
     {
         // var messageOutput = document.createElement('button');
         // var appendChildElement = child.innerHTML.appendChild(messageOutput);
@@ -64,7 +70,7 @@ function messageAppend(words)
         // document.getElementById(""+k).addEventListener('click',input.setAttribute("value", document.getElementById(""+k).innerHTML));   
         k = k +1 ;
     }
-    $('#messages').append($('<li>').html(output));
+    $('#messages').append($('<li>').html(words[1] +" " +words[2] +output));
 
     // for (p = 0 ; p<= k; p++)
     // {

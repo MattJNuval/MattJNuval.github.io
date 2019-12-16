@@ -15,10 +15,15 @@ $(function () {
     console.log("A USER CONNECTED");
     socket.emit('fromServer');
     socket.emit('disconnect');
-
-    socket.on('fromServer', function (data) {
-      console.log("this is " + data);
-        // $('#messages').append($('<li>').text(data));
+    socket.on('fromServerRefresh', function (data) {
+        
+        $('.list').remove();
+        
+      });
+    socket.on('fromServerR', function (data) {
+      console.log("this is " + data + "HW");
+     
+        $('#log').append($('<li class="list">').text(data));
     });
 
     socket.on('disconnect', function (data) {
