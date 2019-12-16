@@ -38,6 +38,7 @@ io.on('connection', function (socket) {
             //         nameAssigned.splice(l,1);
             //     }
             // }
+            // io.emit('fromServerRefresh', "");
             // for ( k = 0; k < nameAssigned.length ; k++)
             // {
             //     io.emit('fromServerR', nameAssigned[k]);
@@ -60,17 +61,28 @@ io.on('connection', function (socket) {
 
         if(t%2 == 1)
         {
+            //Gets the SocketID and stores it to Unique1 list
             unique1.push(socket.id);
-            id = socket.id
-            //console.log( "HELLO INSIDE USER HAS ENTERED");
+
+            //Grabs Unique Name
             data = randomUserName();
+
             transferredData = data;//update transferredData
             t++; 
+            
+            //Send a General msg to all users that a user has connected
             io.emit('fromServer', data + " has connected");
+            
+            //Sends message to specific Socket ID
             io.to(socket.id).emit('fromServerAssign', data );
             
+            //Saves the Name Assigned to a List
             nameAssigned.push(data);
+            
+            //Tells the Right Hand Side to Refresh
             io.emit('fromServerRefresh', "");
+
+            //Sends a New list of Names
             for ( k = 0; k < nameAssigned.length ; k++)
             {
                 io.emit('fromServerR', nameAssigned[k]);
@@ -78,7 +90,11 @@ io.on('connection', function (socket) {
         }
         else{
             t++;
+            
+            //Push assigned ID again, just in case chat is on the second unique ID. 
             io.to(socket.id).emit('fromServerAssign', data );
+
+            //Saves Unique2 ID to a List.
             unique2.push(socket.id);
         }   
        
@@ -95,6 +111,9 @@ http.listen(7110, function () {
     console.log('listening on *:7110');
 });
 
+
+
+//TODO: Fix Random Generator, currently can assign undefine. 
 function randomUserName(){
 
 

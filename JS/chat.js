@@ -18,6 +18,7 @@ $(function () {
         $('#messages').append($('<li>').text(data));
     });
 
+    //Recieves assignment of ID from Server. 
     socket.on('fromServerAssign', function (data) {
         // $('#messages').append($('<li>').text(data));
         idName = data;
@@ -29,6 +30,8 @@ $(function () {
     socket.on('chat message', function (msg) {
         messageAppend(wordFilter(msg));
     });
+
+    //Appends all Msg sent to general group with IdName. 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', idName +": " +$('#m').val());
@@ -53,42 +56,32 @@ function messageAppend(words)
     
     console.log(words[0]);
     var list = document.createElement("li");
-   // var child = message.appendChild(list);
-//    var apples = $('#messages').append($('<li>').text(""));
+ 
     var output= "";
+    // i is 3 because the first few blocks of words is the userName. 
     var i = 3;
     for (i = 3 ; i < words.length ; i++)
     {
-        // var messageOutput = document.createElement('button');
-        // var appendChildElement = child.innerHTML.appendChild(messageOutput);
-        // appendChildElement.innerHTML = words[i];
-        // messageOutput.innerHTML = words[i];
+       
 
-        // apples.append($('<button>').text(words[i]+" "));
         output  =output+"<button id=" +k + ">"+ words[i] +"</button>"+ " ";
         console.log(words[i]);
-        // document.getElementById(""+k).addEventListener('click',input.setAttribute("value", document.getElementById(""+k).innerHTML));   
+        
         k = k +1 ;
     }
     $('#messages').append($('<li>').html(words[1] +" " +words[2] +output));
 
-    // for (p = 0 ; p<= k; p++)
-    // {
-    //     document.getElementById(""+p).addEventListener('click',startText(document.getElementById(""+p).innerHTML));  
-    // }
-    // buttonStarter()
-    ButtonAssign();
+    
+    buttonAssign();
 }
 function output()
 {
     console.log("TEST")
 }
 
-// function startText(){
-//     document.getElementById("m").value = document.getElementById(""+p).innerHTML;
-// }
 
-function ButtonAssign()
+
+function buttonAssign()
 {
     
     while(p<k)

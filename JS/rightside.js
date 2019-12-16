@@ -15,16 +15,21 @@ $(function () {
     console.log("A USER CONNECTED");
     socket.emit('fromServer');
     socket.emit('disconnect');
+
+    //Recieves signal from server to refresh.
     socket.on('fromServerRefresh', function (data) {
         
         $('.list').remove();
         
       });
+    
+    //Sends the current list of Logged in Users. 
     socket.on('fromServerR', function (data) {
       console.log("this is " + data + "HW");
      
         $('#log').append($('<li class="list">').text(data));
     });
+
 
     socket.on('disconnect', function (data) {
         // $('#messages').append($('<li>').text(data));
