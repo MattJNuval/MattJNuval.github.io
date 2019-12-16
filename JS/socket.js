@@ -2,8 +2,11 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass'];
-var latterUsed = ['people', 'AI', 'alien', 'android', 'wanderer'];
+var transferredData = new Array();
+//transfferedData[0] = "not used";
+
+//var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass'];//do we need this?
+//var latterUsed = ['people', 'AI', 'alien', 'android', 'wanderer'];//do we need this?
 
 
 app.get('/', function (req, res) {
@@ -11,15 +14,15 @@ app.get('/', function (req, res) {
 });
 
 
-var  p = 1;
+var p = 1;
 io.on('connection', function (socket) {
     console.log('a user connected');
     socket.on('disconnect', function (data) {
         if(p%2 == 1)
         {
             console.log('user disconnected');
-            data = 'A user disconnected'
-            io.emit('disconnect', data);
+            data = transferredData + " disconnected";//transferredData USE HERE !
+            io.emit('disconnect', data); 
             p++;
         }
         else{
@@ -29,21 +32,22 @@ io.on('connection', function (socket) {
     });
 });
 
-var  k = 1;
+var t = 1;
 io.on('connection', function (socket) {
     socket.on('fromServer', function (data) {
 
-        console.log( "HELLO OUTSIDE USER HAS ENTERED");
+        //console.log( "HELLO OUTSIDE USER HAS ENTERED");
 
-        if(k%2 == 1)
+        if(t%2 == 1)
         {
-            console.log( "HELLO INSIDE USER HAS ENTERED");
+            //console.log( "HELLO INSIDE USER HAS ENTERED");
             data = randomUserName();
-            k++; 
-            io.emit('fromServer', data);
+            transferredData = data;//update transferredData
+            t++; 
+            io.emit('fromServer', data + " has connected");
         }
         else{
-            k++;
+            t++;
         }
        
     });
@@ -51,18 +55,13 @@ io.on('connection', function (socket) {
 
 io.on('connection', function (socket) {
     socket.on('chat message', function (msg) {
-        io.emit('chat message', msg);
+        io.emit('chat message', transferredData + " " + msg);
     });
 });
 
 http.listen(7110, function () {
     console.log('listening on *:7110');
 });
-
-function assignment()
-{
-    
-}
 
 function randomUserName(){
 

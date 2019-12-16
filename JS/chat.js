@@ -14,7 +14,7 @@ $(function () {
         $('#m').val('');
         return false;
     });
-
+ 
     console.log("A USER CONNECTED");
     socket.emit('fromServer');
     socket.emit('disconnect');
