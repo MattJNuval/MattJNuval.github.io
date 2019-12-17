@@ -23,26 +23,30 @@ io.on('connection', function (socket) {
         if(p%2 == 1)
         {
             console.log('user disconnected');
-            data = transferredData + " disconnected";//transferredData USE HERE !
-            io.emit('disconnect', data); 
+            // data = transferredData + " disconnected";//transferredData USE HERE !
+            data = unique1;
+            // io.emit('disconnect', data); 
             
             //TODO: Need Work for disconnect Function
 
-            // for (l = 0 ; unique1.length ; l ++)
-            // {
-            //     if (socket.id == unique1[l] || socket.id == unique2[l])
-            //     {
-            //         io.emit('disconnect', nameAssigned); 
-            //         unique1.splice(l,1);
-            //         unique2.splice(l,1);
-            //         nameAssigned.splice(l,1);
-            //     }
-            // }
-            // io.emit('fromServerRefresh', "");
-            // for ( k = 0; k < nameAssigned.length ; k++)
-            // {
-            //     io.emit('fromServerR', nameAssigned[k]);
-            // }
+            for (l = 0 ; l< unique1.length ; l++)
+            {
+                if (socket.id == unique1[l] || socket.id == unique2[l])
+                {
+                    data = nameAssigned[l]
+                    io.emit('disconnect', data+ " disconnected"); 
+                    unique1.splice(l,1);
+                    unique2.splice(l,1);
+                    nameAssigned.splice(l,1);
+
+                }
+            }
+            io.emit('fromServerRefresh', "");
+            for ( k = 0; k < nameAssigned.length ; k++)
+            {
+                data = nameAssigned[k];
+                io.emit('fromServerR', data);
+            }
             
             p++;
         }
@@ -120,8 +124,8 @@ function randomUserName(){
     var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass']
     var latterUsed = ['people', 'AI', 'alien', 'android', 'wanderer']
   
-    var realFormerUsed = formerUsed[Math.floor(Math.random() * 3)];//generate random number between 0 to 4
-    var realLatterUsed = latterUsed[Math.floor(Math.random() * 3)];
+    var realFormerUsed = formerUsed[Math.floor(Math.random() * 4)];//generate random number between 0 to 4
+    var realLatterUsed = latterUsed[Math.floor(Math.random() * 4)];
   
     return (realFormerUsed  + " " + realLatterUsed);
       
