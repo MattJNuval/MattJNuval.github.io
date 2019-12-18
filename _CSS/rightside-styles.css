@@ -1,7 +1,7 @@
 * {
-    width: 91%;
+    width: 100%;
     height: auto;
-    background: #c0dd98;
+    background: #8aafe5;
   }
   
   .nonSecureBanner { 
@@ -9,22 +9,37 @@
       position: fixed;
       bottom: 5px;
       right: 5px;
+      left: 5px;
       background: blue;
       color: yellow;
       text-align: center;
       font-size: 20px;
   }
   
-  .connectedUsers {
+  .usersList {
       font-size: 20px;
-      list-style-image: url("pictures/blueArrow.jpg");
   }
   
-  .howToUse{
+  .connectedUsers {
+      font-size: 20px;
+  }
+  
+  .howToUse {
       color: black;
       font-size: 20px;
       text-align: justify;
       position: absolute;
-      bottom: 10px;
-      text-align: left;  
+      bottom: 15%;
+      text-align: left;
+      width: 85%;
+  
+  }
+  
+  li {
+    list-style-image: url("../pictures/blueArrow.jpg");
+  
+  }
+  
+  p {
+      background: blue;
   }

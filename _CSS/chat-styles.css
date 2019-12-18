@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+	background-image: url('../pictures/clouds2.png');
+    font-size: 20px;
 }
+
+
 
 body {
     font: 13px Helvetica, Arial;
@@ -43,6 +47,7 @@ form button {
 
 #messages li:nth-child(odd) {
     background: #eee;
+    opacity: 0.5;
 }
 
 /* #fixedResetButton{
@@ -54,5 +59,5 @@ form button {
 
 #messageViewPort
 {
-    padding-bottom: 5% ;
+    padding: 5%
 }

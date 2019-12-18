@@ -2,7 +2,7 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-var transferredData = new Array();
+//var transferredData = new Array();
 //transfferedData[0] = "not used";
 
 //var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass'];//do we need this?
@@ -13,7 +13,7 @@ var unique2 = [];
 var nameAssigned = [];
 var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass', 'Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Gold', 'Sliver', 'Grey']
 var latterUsed = [ 'AI', 'Alien', 'Android', 'Wanderer', 'Robot', 'Comp', 'Pineapple', 'Apple', 'Pear', 'Orange', 'Fruit', 'Bottle', 'Candy']
-
+var actualName;
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
@@ -23,16 +23,8 @@ var p = 1;
 io.on('connection', function (socket) {
     console.log('a user connected');
     socket.on('disconnect', function (data) {
-        if(p%2 == 1)
-        {
-            console.log('user disconnected');
-            // data = transferredData + " disconnected";//transferredData USE HERE !
-            data = unique1;
-            // io.emit('disconnect', data); 
-            
-            //TODO: Need Work for disconnect Function
 
-            for (l = 0 ; l< unique1.length ; l++)
+        for (l = 0 ; l< unique1.length ; l++)
             {
                 if (socket.id == unique1[l] || socket.id == unique2[l])
                 {
@@ -50,12 +42,57 @@ io.on('connection', function (socket) {
                 data = nameAssigned[k];
                 io.emit('fromServerR', data);
             }
+        // if(p%2 == 1)
+        // {
+        //     console.log('user disconnected');
+        //     // data = transferredData + " disconnected";//transferredData USE HERE !
+        //     data = unique1;
+        //     // io.emit('disconnect', data); 
             
-            p++;
-        }
-        else{
-            p++;
-        }
+        //     //TODO: Need Work for disconnect Function
+
+        //     for (l = 0 ; l< unique1.length ; l++)
+        //     {
+        //         if (socket.id == unique1[l] || socket.id == unique2[l])
+        //         {
+        //             data = nameAssigned[l]
+        //             io.emit('disconnect', data+ " disconnected"); 
+        //             unique1.splice(l,1);
+        //             unique2.splice(l,1);
+        //             nameAssigned.splice(l,1);
+
+        //         }
+        //     }
+        //     io.emit('fromServerRefresh', "");
+        //     for ( k = 0; k < nameAssigned.length ; k++)
+        //     {
+        //         data = nameAssigned[k];
+        //         io.emit('fromServerR', data);
+        //     }
+            
+        //     p++;
+        // }
+        // else{
+        //     for (l = 0 ; l< unique2.length ; l++)
+        //     {
+        //         if (socket.id == unique1[l] || socket.id == unique2[l])
+        //         {
+        //             data = nameAssigned[l]
+        //             io.emit('disconnect', data+ " disconnected"); 
+        //             unique1.splice(l,1);
+        //             unique2.splice(l,1);
+        //             nameAssigned.splice(l,1);
+
+        //         }
+        //     }
+        //     io.emit('fromServerRefresh', "");
+        //     for ( k = 0; k < nameAssigned.length ; k++)
+        //     {
+        //         data = nameAssigned[k];
+        //         io.emit('fromServerR', data);
+        //     }
+        //     p++;
+        // }
         
     });
 });
@@ -66,9 +103,7 @@ io.on('connection', function (socket) {
    
     socket.on('fromServer', function (data) {
 
-        //console.log( "HELLO OUTSIDE USER HAS ENTERED");
 
-        
         if(t%2 == 1)
         {
             //Gets the SocketID and stores it to Unique1 list
@@ -78,6 +113,7 @@ io.on('connection', function (socket) {
             if (!check){
                 // data = nameCheck(randomUserName());
                 data =nameCheck(randomUserName());
+                actualName = data;
                  //Send a General msg to all users that a user has connected
             io.emit('fromServer', data + " has connected");
             
@@ -93,6 +129,8 @@ io.on('connection', function (socket) {
                 check = true;
             }
             else{
+                data = actualName;
+                io.to(socket.id).emit('fromServerAssign', data );
                 check = false;
             }
             
@@ -113,16 +151,30 @@ io.on('connection', function (socket) {
             if (!check){
                 // data = nameCheck(randomUserName());
                 data = nameCheck(randomUserName());
+                actualName = data;
                 //Push assigned ID again, just in case chat is on the second unique ID. 
-            io.to(socket.id).emit('fromServerAssign', data );
-            console.log("HELO WORLD" + data);
+            
+            console.log("HELLO WORLD" + data);
 
             //Saves Unique2 ID to a List.
             unique2.push(socket.id);
+            // io.emit('fromServer', data + " has connected");
+            
+            io.to(socket.id).emit('fromServerAssign', data );
                 check = true;
             }
             else{
+                data = actualName;
+                // io.emit('fromServer', data + " has connected");
+            
+                io.to(socket.id).emit('fromServerAssign', data );
                 check = false;
+            }
+
+            io.emit('fromServerRefresh', "");
+            for ( k = 0; k < nameAssigned.length ; k++)
+            {
+                io.emit('fromServerR', nameAssigned[k]);
             }
             
         }   
@@ -136,20 +188,20 @@ io.on('connection', function (socket) {
     });
 });
 
-// when the client emits 'typing', we broadcast it to others
-io.on('connection', function (socket) {
-socket.on('typing', function () {
-    socket.broadcast.emit('typing', {
-      transferredData: socket.data
-    });
-  });
-// when the client emits 'stop typing', we broadcast it to others
-socket.on('stop typing', function () {
-    socket.broadcast.emit('stop typing', {
-        transferredData: socket.data
-    });
-  });
-});
+// // when the client emits 'typing', we broadcast it to others
+// io.on('connection', function (socket) {
+//     socket.on('newmessage', function () {
+//         socket.broadcast.emit('Typing Msg', {
+//             transferredData: socket.data
+//     });
+//   });
+// // when the client emits 'stop typing', we broadcast it to others
+//     socket.on('stop typing', function () {
+//         socket.broadcast.emit('stop typing', {
+//             transferredData: socket.data
+//     });
+//   });
+// });
 http.listen(7110, function () {
     console.log('listening on *:7110');
 });

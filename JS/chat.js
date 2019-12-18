@@ -3,8 +3,9 @@
 var bns;
 var k = 0;
 var p= 0;
-var idName = "" ;
+var idName;
 var input = document.getElementById("m");
+// input.addEventListener('keyup', alertNewMsg);
 $(function () {
     var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
 
@@ -23,6 +24,11 @@ $(function () {
         // $('#messages').append($('<li>').text(data));
         idName = data;
         console.log("I AM CHAT " + data);
+        if (idName == null || idName == undefined)
+        {
+            idName = data;
+        }
+
     });
     socket.on('disconnect', function (data) {
         $('#messages').append($('<li>').text(data));
@@ -42,6 +48,11 @@ $(function () {
     });
 });
 
+// function alertNewMsg()
+// {
+//     socket.broadcast.emit('newMessage',"Typing Msg " + idName);
+    
+// }
 
 
 function wordFilter(output){
@@ -93,6 +104,7 @@ function buttonAssign()
             console.log(p);
             document.getElementById(""+p).addEventListener('click',function(){
                 document.getElementById("m").value =document.getElementById("m").value+this.innerHTML+ " "}); 
+                // alertNewMsg();
                 
             p = p +1;
         }
