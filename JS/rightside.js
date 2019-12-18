@@ -19,13 +19,13 @@ $(function () {
     //Recieves signal from server to refresh.
     socket.on('fromServerRefresh', function (data) {
         
-        $('.list').remove();
+        $('.list').remove();//rightside disconnect
         
       });
     
     //Sends the current list of Logged in Users. 
     socket.on('fromServerR', function (data) {
-      console.log("this is " + data + "HW");
+      console.log("this is " + data + " Has connected");
      
         $('#log').append($('<li class="list">').text(data));
     });

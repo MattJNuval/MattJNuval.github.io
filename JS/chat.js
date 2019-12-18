@@ -3,7 +3,7 @@
 var bns;
 var k = 0;
 var p= 0;
-var idName ;
+var idName = "" ;
 var input = document.getElementById("m");
 $(function () {
     var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
@@ -22,6 +22,7 @@ $(function () {
     socket.on('fromServerAssign', function (data) {
         // $('#messages').append($('<li>').text(data));
         idName = data;
+        console.log("I AM CHAT " + data);
     });
     socket.on('disconnect', function (data) {
         $('#messages').append($('<li>').text(data));
@@ -69,7 +70,7 @@ function messageAppend(words)
         
         k = k +1 ;
     }
-    $('#messages').append($('<li>').html(words[1] +" " +words[2] +output));
+    $('#messages').append($('<li>').html("<strong>"+words[1] +" " +words[2]+"</strong>" +output));
 
     
     buttonAssign();
@@ -92,6 +93,7 @@ function buttonAssign()
             console.log(p);
             document.getElementById(""+p).addEventListener('click',function(){
                 document.getElementById("m").value =document.getElementById("m").value+this.innerHTML+ " "}); 
+                
             p = p +1;
         }
         
@@ -99,4 +101,43 @@ function buttonAssign()
     }
 }
 
+// // Adds the visual chat typing message
+// function addChatTyping (data) {
+//     data.typing = true;
+//     data.message = 'is typing';
+//     addChatMessage(data);
+//   }
+
+//   // Removes the visual chat typing message
+//   function removeChatTyping (data) {
+//     getTypingMessages(data).fadeOut(function () {
+//       $(this).remove();
+//     });
+//   }
+//    // Updates the typing event
+//    function updateTyping () {
+//     if (connected) {
+//       if (!typing) {
+//         typing = true;
+//         socket.emit('typing');
+//       }
+//       lastTypingTime = (new Date()).getTime();
+
+//       setTimeout(function () {
+//         var typingTimer = (new Date()).getTime();
+//         var timeDiff = typingTimer - lastTypingTime;
+//         if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+//           socket.emit('stop typing');
+//           typing = false;
+//         }
+//       }, TYPING_TIMER_LENGTH);
+//     }
+//   }
+
+//   // Gets the 'X is typing' messages of a user
+//   function getTypingMessages (data) {
+//     return $('.typing.message').filter(function (i) {
+//       return $(this).data('Idname') === data.idName;
+//     });
+//   }
 
