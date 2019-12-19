@@ -147,6 +147,7 @@ io.on('connection', function (socket) {
             }
             else{
                 data = actualName;
+                io.emit('fromServer', data + " has connected");
                 io.to(socket.id).emit('fromServerAssign', data );
                 check = false;
             }
