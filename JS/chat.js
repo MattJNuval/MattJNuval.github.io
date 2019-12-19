@@ -76,7 +76,7 @@ function messageAppend(words)
     {
        
 
-        output  =output+"<button id=" +k + ">"+ words[i] +"</button>"+ " ";
+        output  =output+"<button id=" +k + " class='button'" + ">"+ words[i] +"</button>"+ " ";
         console.log(words[i]);
         
         k = k +1 ;
