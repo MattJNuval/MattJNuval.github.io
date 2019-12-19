@@ -40,16 +40,17 @@ io.on('connection', function (socket) {
                     nameAssigned.splice(l,1);
                     // io.emit('fromServerR', nameAssigned[l]);
 
-                }
-            }
-            
-            io.emit('fromServerRefresh', "");
+                    io.emit('fromServerRefresh', "");
             for ( k = 0; k < nameAssigned.length ; k++)
             {
                 // data = nameAssigned[k];
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
+                }
+            }
+            
+            
         // if(p%2 == 1)
         // {
         //     console.log('user disconnected');
