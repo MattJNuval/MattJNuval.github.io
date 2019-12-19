@@ -6,6 +6,8 @@ var p= 0;
 var idName;
 var input = document.getElementById("m");
 // input.addEventListener('keyup', alertNewMsg);
+
+//socket and corresponding port number
 $(function () {
     var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
 
@@ -54,7 +56,7 @@ $(function () {
     
 // }
 
-
+//splits messages into individual words
 function wordFilter(output){
     // output = output.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
     var words = output.split(" ");
@@ -62,10 +64,10 @@ function wordFilter(output){
 
 }
 
-//Appends a Message into 
+//Appends a Message into chat.html
 function messageAppend(words)
 {
-    
+    //messages appended in list format
     console.log(words[0]);
     var list = document.createElement("li");
  
@@ -73,32 +75,29 @@ function messageAppend(words)
     // i is 3 because the first few blocks of words is the userName. 
     var i = 3;
     for (i = 3 ; i < words.length ; i++)
-    {
-       
-
+    {//each word is output as a clear clickable button with text
         output  =output+"<button id=" +k + " class='button'" + ">"+ words[i] +"</button>"+ " ";
         console.log(words[i]);
         
         k = k +1 ;
     }
     $('#messages').append($('<li>').html("<strong>"+words[1] +" " +words[2]+"</strong>" +output));
-
     
     buttonAssign();
 }
+
+
 function output()
 {
     console.log("TEST")
 }
 
 
-
+//sets clicked words (buttons) as new context
 function buttonAssign()
-{
-    
+{    
     while(p<k)
-    { 
-    
+    {    
         if(p<=k)
         {
             console.log(p);
@@ -108,8 +107,6 @@ function buttonAssign()
                 
             p = p +1;
         }
-        
-    
     }
 }
 
