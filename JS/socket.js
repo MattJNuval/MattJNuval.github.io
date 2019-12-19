@@ -22,7 +22,6 @@ app.get('/', function (req, res) {
 
 
 var p = 1;
-var disconnect = false;
 //detects when user connects
 io.on('connection', function (socket) {
     console.log('a user connected');
@@ -42,22 +41,14 @@ io.on('connection', function (socket) {
                     // io.emit('fromServerR', nameAssigned[l]);
 
                     io.emit('fromServerRefresh', "");
-                    disconnect = true;
-                    break;
-
-            
-                }
-            }
-            if (disconnect)
-            {
-                for ( k = 0; k < nameAssigned.length ; k++)
+            for ( k = 0; k < nameAssigned.length ; k++)
             {
                 // data = nameAssigned[k];
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
+                }
             }
-            
             
             
         // if(p%2 == 1)
