@@ -27,6 +27,7 @@ io.on('connection', function (socket) {
     console.log('a user connected');
     socket.on('disconnect', function (data) {
         
+        
         //detects when user disconnects
         for (l = 0 ; l< unique1.length ; l++)
             {
