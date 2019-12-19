@@ -38,15 +38,15 @@ io.on('connection', function (socket) {
                     unique1.splice(l,1);
                     unique2.splice(l,1);
                     nameAssigned.splice(l,1);
-                    io.emit('fromServerRefresh', "");
-                    for ( t = 0; t < nameAssigned.length ; t++)
-                    {
-                        if (data == nameAssigned[l])
-                        {
+                    // io.emit('fromServerRefresh', "");
+                    // for ( t = 0; t < nameAssigned.length ; t++)
+                    // {
+                    //     if (data == nameAssigned[l])
+                    //     {
                             
-                        nameAssigned.splice(l,1);
-                        }
-                    }
+                    //     nameAssigned.splice(l,1);
+                    //     }
+                    // }
                     
                     // io.emit('fromServerR', nameAssigned[l]);
 
