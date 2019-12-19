@@ -11,7 +11,9 @@ var io = require('socket.io')(http);
 var unique1 = [];
 var unique2 = [];
 var nameAssigned = [];
+//first name of username
 var formerUsed = ['Cool', 'Good', 'Plain', 'Kind', 'Badass', 'Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Gold', 'Sliver', 'Grey']
+//last name of username
 var latterUsed = [ 'AI', 'Alien', 'Android', 'Wanderer', 'Robot', 'Comp', 'Pineapple', 'Apple', 'Pear', 'Orange', 'Fruit', 'Bottle', 'Candy']
 var actualName;
 app.get('/', function (req, res) {
@@ -20,14 +22,16 @@ app.get('/', function (req, res) {
 
 
 var p = 1;
+//detects when user connects
 io.on('connection', function (socket) {
     console.log('a user connected');
     socket.on('disconnect', function (data) {
-
+        
+        //detects when user disconnects
         for (l = 0 ; l< unique1.length ; l++)
             {
                 if (socket.id == unique1[l] || socket.id == unique2[l])
-                {
+                {//output which user disconnected
                     data = nameAssigned[l]
                     io.emit('disconnect', data+ " disconnected"); 
                     unique1.splice(l,1);
@@ -182,6 +186,7 @@ io.on('connection', function (socket) {
     });
 });
 
+
 io.on('connection', function (socket) {
     socket.on('chat message', function (msg) {
         io.emit('chat message', " " + msg);
@@ -202,6 +207,8 @@ io.on('connection', function (socket) {
 //     });
 //   });
 // });
+
+//listening on port 7110
 http.listen(7110, function () {
     console.log('listening on *:7110');
 });
@@ -228,6 +235,7 @@ function randomUserName(){
 // var realFormerUsed;
 // var realLatterused;
 
+//checks if generated username is already in use
 function nameCheck( output)
 {
     var name = output;
