@@ -168,7 +168,7 @@ io.on('connection', function (socket) {
 
             //Saves Unique2 ID to a List.
             unique2.push(socket.id);
-            // io.emit('fromServer', data + " has connected");
+            io.emit('fromServer', data + " has connected");
             
             io.to(socket.id).emit('fromServerAssign', data );
                 check = true;
