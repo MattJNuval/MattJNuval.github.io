@@ -9,7 +9,7 @@ var input = document.getElementById("m");
 
 //socket and corresponding port number
 $(function () {
-    var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
+    var socket = io('http://23.242.212.90:7110', { path: '/socket.io' }); // connect to server
 
    
  
