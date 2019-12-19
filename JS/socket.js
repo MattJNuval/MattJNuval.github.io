@@ -58,10 +58,11 @@ io.on('connection', function (socket) {
                 console.log("Names " + k + " :" + newNameAssigned[k]);
                 io.emit('fromServerR', newNameAssigned[k]);
             }
-            nameAssigned = newNameAssigned;
-
+           
+                nameAssigned = newNameAssigned;
                 }
-                break;
+
+                // break;
             }
             
             

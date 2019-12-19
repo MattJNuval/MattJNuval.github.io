@@ -22,12 +22,12 @@ $(function () {
         $('.list').remove();//rightside disconnect
         
       });
-      socket.on('fromServerRemove', function (data) {
+    //   socket.on('fromServerRemove', function (data) {
         
 
-        $('.list').eq(parseInt(data,10)).remove();//rightside disconnect
+    //     $('.list').eq(parseInt(data,10)).remove();//rightside disconnect
         
-      });
+    //   });
     
     //Sends the current list of Logged in Users. 
     socket.on('fromServerR', function (data) {
