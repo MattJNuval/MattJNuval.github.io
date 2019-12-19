@@ -38,31 +38,17 @@ io.on('connection', function (socket) {
                     unique1.splice(l,1);
                     unique2.splice(l,1);
                     nameAssigned.splice(l,1);
-                    // newNameAssigned = nameAssigned;
-                    // io.emit('fromServerRefresh', "");
-                    // for ( t = 0; t < nameAssigned.length ; t++)
-                    // {
-                    //     if (data == nameAssigned[l])
-                    //     {
-                            
-                    //     nameAssigned.splice(l,1);
-                    //     }
-                    // }
-                    
-                    // io.emit('fromServerR', nameAssigned[l]);
+                
 
                     io.emit('fromServerRefresh', "");
             for ( k = 0; k < nameAssigned.length ; k++)
             {
-                // data = nameAssigned[k];
+                
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
            
-                // nameAssigned = newNameAssigned;
                 }
-
-                // break;
             }
             
             
