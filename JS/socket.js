@@ -43,12 +43,12 @@ io.on('connection', function (socket) {
                 }
             }
             
-            io.emit('fromServerRefresh', "");
-            for ( k = 0; k < nameAssigned.length ; k++)
-            {
-                // data = nameAssigned[k];
-                io.emit('fromServerR', nameAssigned[k]);
-            }
+            // io.emit('fromServerRefresh', "");
+            // for ( k = 0; k < nameAssigned.length ; k++)
+            // {
+            //     // data = nameAssigned[k];
+            //     io.emit('fromServerR', nameAssigned[k]);
+            // }
         // if(p%2 == 1)
         // {
         //     console.log('user disconnected');
