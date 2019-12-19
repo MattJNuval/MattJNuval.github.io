@@ -47,6 +47,7 @@ io.on('connection', function (socket) {
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
+            break;
                 }
             }
             
