@@ -30,21 +30,23 @@ io.on('connection', function (socket) {
         //detects when user disconnects
         for (l = 0 ; l< unique1.length ; l++)
             {
+                io.emit('fromServerRefresh', "");
                 if (socket.id == unique1[l] || socket.id == unique2[l])
                 {//output which user disconnected
-                    data = nameAssigned[l]
+                    data = nameAssigned[l];
                     io.emit('disconnect', data+ " disconnected"); 
                     unique1.splice(l,1);
                     unique2.splice(l,1);
                     nameAssigned.splice(l,1);
+                    // io.emit('fromServerR', nameAssigned[l]);
 
                 }
             }
-            io.emit('fromServerRefresh', "");
+            
             for ( k = 0; k < nameAssigned.length ; k++)
             {
-                data = nameAssigned[k];
-                io.emit('fromServerR', data);
+                // data = nameAssigned[k];
+                io.emit('fromServerR', nameAssigned[k]);
             }
         // if(p%2 == 1)
         // {
