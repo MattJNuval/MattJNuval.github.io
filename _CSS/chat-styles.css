@@ -61,3 +61,17 @@ form button {
 {
     padding: 5%
 }
+
+.button {
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+}
+
+.button: hover {
+	background-color: purple;
+	color: white;
+}
