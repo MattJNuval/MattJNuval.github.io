@@ -31,13 +31,13 @@ io.on('connection', function (socket) {
         for (l = 0 ; l< unique1.length ; l++)
             {
                 // io.emit('fromServerRefresh', "");
-                if (socket.id == unique1[l] )
+                if (socket.id == unique1[l] || socket.id == unique2[l])
                 {//output which user disconnected
                     data = nameAssigned[l];
                     io.emit('disconnect', data+ " disconnected"); 
                     unique1.splice(l,1);
                     unique2.splice(l,1);
-                    nameAssigned.splice(l,1);
+                    nameAssigned[l] = null;
                     // io.emit('fromServerR', nameAssigned[l]);
 
                     io.emit('fromServerRefresh', "");
@@ -47,30 +47,7 @@ io.on('connection', function (socket) {
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
-            
-            break;
                 }
-
-               else  if (socket.id == unique2[l] )
-                {//output which user disconnected
-                    data = nameAssigned[l];
-                    io.emit('disconnect', data+ " disconnected"); 
-                    unique1.splice(l,1);
-                    unique2.splice(l,1);
-                    nameAssigned.splice(l,1);
-                    // io.emit('fromServerR', nameAssigned[l]);
-
-                    io.emit('fromServerRefresh', "");
-            for ( k = 0; k < nameAssigned.length ; k++)
-            {
-                // data = nameAssigned[k];
-                console.log("Names " + k + " :" + nameAssigned[k]);
-                io.emit('fromServerR', nameAssigned[k]);
-            }
-            
-            break;
-                }
-                
             }
             
             
@@ -190,7 +167,7 @@ io.on('connection', function (socket) {
 
             //Saves Unique2 ID to a List.
             unique2.push(socket.id);
-            io.emit('fromServer', data + " has connected");
+            // io.emit('fromServer', data + " has connected");
             
             io.to(socket.id).emit('fromServerAssign', data );
                 check = true;
