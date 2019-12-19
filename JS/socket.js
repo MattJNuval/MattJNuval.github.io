@@ -47,7 +47,7 @@ io.on('connection', function (socket) {
             for ( k = 0; k < nameAssigned.length ; k++)
             {
                 // data = nameAssigned[k];
-                console.log("Names " + nameAssigned[k]);
+                console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
         // if(p%2 == 1)
