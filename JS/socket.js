@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
         
         
         //detects when user disconnects
-        for (l = 0 ; l< unique1.length ; l++)
+        for (l = unique1.length-1 ; l>= 0 ; l--)
             {
                 // io.emit('fromServerRefresh', "");
                 if (socket.id == unique1[l] || socket.id == unique2[l])
