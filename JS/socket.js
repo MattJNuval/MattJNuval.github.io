@@ -51,8 +51,7 @@ io.on('connection', function (socket) {
             break;
                 }
 
-
-                else if (socket.id == unique2[l] )
+               else  if (socket.id == unique2[l] )
                 {//output which user disconnected
                     data = nameAssigned[l];
                     io.emit('disconnect', data+ " disconnected"); 
@@ -68,7 +67,10 @@ io.on('connection', function (socket) {
                 console.log("Names " + k + " :" + nameAssigned[k]);
                 io.emit('fromServerR', nameAssigned[k]);
             }
+            
             break;
+                }
+                
             }
             
             
