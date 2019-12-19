@@ -2,7 +2,7 @@
 // document.getElementById("whoComesIn").outerHTML = "<p>" + newComer + "</p>";
 
 $(function () {
-    var socket = io('http://23.242.212.90:7110', { path: '/socket.io' }); // connect to server
+    var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
@@ -20,6 +20,12 @@ $(function () {
     socket.on('fromServerRefresh', function (data) {
         
         $('.list').remove();//rightside disconnect
+        
+      });
+      socket.on('fromServerRemove', function (data) {
+        
+
+        $('.list').eq(parseInt(data,10)).remove();//rightside disconnect
         
       });
     
