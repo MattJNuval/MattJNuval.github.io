@@ -30,7 +30,7 @@ io.on('connection', function (socket) {
         //detects when user disconnects
         for (l = 0 ; l< unique1.length ; l++)
             {
-                io.emit('fromServerRefresh', "");
+                // io.emit('fromServerRefresh', "");
                 if (socket.id == unique1[l] || socket.id == unique2[l])
                 {//output which user disconnected
                     data = nameAssigned[l];
@@ -43,6 +43,7 @@ io.on('connection', function (socket) {
                 }
             }
             
+            io.emit('fromServerRefresh', "");
             for ( k = 0; k < nameAssigned.length ; k++)
             {
                 // data = nameAssigned[k];
@@ -144,7 +145,7 @@ io.on('connection', function (socket) {
             transferredData = data;//update transferredData
             t++; 
             
-           
+            io.emit('fromServerRefresh', "");
 
             //Sends a New list of Names
             for ( k = 0; k < nameAssigned.length ; k++)
