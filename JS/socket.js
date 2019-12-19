@@ -37,7 +37,7 @@ io.on('connection', function (socket) {
                     io.emit('disconnect', data+ " disconnected"); 
                     unique1.splice(l,1);
                     unique2.splice(l,1);
-                    nameAssigned[l] = null;
+                    nameAssigned.splice(l,1);
                     // io.emit('fromServerR', nameAssigned[l]);
 
                     io.emit('fromServerRefresh', "");
