@@ -2,7 +2,7 @@
 // document.getElementById("whoComesIn").outerHTML = "<p>" + newComer + "</p>";
 
 $(function () {
-    var socket = io('http://localhost:7110', { path: '/socket.io' }); // connect to server
+    var socket = io('http://34.94.156.131:7110', { path: '/socket.io' }); // connect to server
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
